@@ -1,280 +1,411 @@
 {
-    "dns": {
-        "disable_cache": false,
-        "disable_expire": false,
-        "final": "dns-remote",
-        "rules": [
-            
-                "domain_suffix": [
-                    "ir",
-                    "firefox.com"
-                ],
-                "server": "dns-direct"
-            
-            {
-                "disable_cache": true,
-                "domain_suffix": [
-                    "app-measurement.com",
-                    "crashlytics.com",
-                    "google-analytics.com",
-                    "appcenter.ms",
-                    "firebase.io"
-                ],
-                "geosite": "category-ads-all",
-                "server": "dns-block"
-            },
-            {
-                "disable_cache": true,
-                "domain_suffix": [
-                    ".arpa.",
-                    ".arpa"
-                ],
-                "server": "dns-block"
-            }
-        ],
-        "servers": [
-            {
-                "address": "https://1.1.1.1/dns-query",
-                "address_resolver": "dns-direct",
-                "address_strategy": "prefer_ipv4",
-                "strategy": "ipv4_only",
-                "tag": "dns-remote"
-            },
-            {
-                "address": "local",
-                "detour": "Direct",
-                "tag": "dns-direct"
-            },
-            {
-                "address": "rcode://success",
-                "tag": "dns-block"
-            }
-        ],
+  "dns": {
+    "servers": [
+      {
+        "tag": "google",
+        "address": "tls://8.8.8.8"
+      },
+      {
+        "tag": "local",
+        "address": "223.5.5.5",
+        "detour": "direct"
+      },
+      {
+        "tag": "block",
+        "address": "rcode://success"
+      }
+    ],
+    "rules": [
+      {
+        "geosite": "category-ads-all",
+        "server": "block",
+        "disable_cache": true
+      },
+      {
+        "outbound": "any",
+        "server": "local"
+      },
+      {
+        "geosite": "cn",
+        "server": "local"
+      }
+    ],
         "strategy": "ipv4_only"
     },
     "experimental": {
         "clash_api": {
-            "cache_file": "cache.db",
-            "default_mode": "rule",
             "external_controller": "127.0.0.1:9090",
-            "external_ui": "dashboard",
             "secret": "",
             "store_selected": true
         }
     },
     "inbounds": [
         {
-            "domain_strategy": "prefer_ipv4",
-            "listen": "::",
-            "listen_port": 2080,
+            "auto_route": true,
+            "domain_strategy": "ipv4_only",
+            "endpoint_independent_nat": true,
+            "inet4_address": "172.19.0.1/30",
+            "mtu": 9000,
             "sniff": true,
+            "sniff_override_destination": true,
+            "strict_route": true,
+            "type": "tun"
+        },
+        {
+            "domain_strategy": "ipv4_only",
+            "listen": "127.0.0.1",
+            "listen_port": 2333,
+            "sniff": true,
+            "sniff_override_destination": true,
+            "tag": "socks-in",
+            "type": "socks",
+            "users": []
+        },
+        {
+            "domain_strategy": "ipv4_only",
+            "listen": "127.0.0.1",
+            "listen_port": 2334,
+            "sniff": true,
+            "sniff_override_destination": true,
             "tag": "mixed-in",
-            "type": "mixed"
+            "type": "mixed",
+            "users": []
         }
     ],
-    "log": {
-        "level": "info"
-    },
+    "log": {},
     "outbounds": [
         {
+            "tag": "hello",
+            "type": "selector",
+            "default": "urltest",
             "outbounds": [
-                "Best Latency",
-                "SSH1",
-                "SSH2",
-                "SSH3",
-                "SSH4",
-                "SSH5",
-                "SSH6",
-                "SSH7",
-                "SSH8",
-                "SSH9",
-                "SSH10"
+                "urltest",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12",
+                "13",
+                "14",
+                "15"
+            ]
+        },
+
+    {
+  "type": "http",
+  "tag": "1",
+  "server": "103.229.28.29",
+  "server_port": 8000,
+  "username": "n4W3SX",
+  "password": "xLo3xj",
+  "path": "",
+  "headers": {},
+  "tls": {  "enabled": true,
+  "disable_sni": false,
+  "server_name": "telewebion.com",
+  "insecure": true}
+
+},
+
+    {
+  "type": "http",
+  "tag": "2",
+  "server": "45.147.31.173",
+  "server_port": 8000,
+  "username": "beHWTa",
+  "password": "CHoNSJ",
+  "path": "",
+  "headers": {},
+  "tls": {  "enabled": true,
+  "disable_sni": false,
+  "server_name": "telewebion.com",
+  "insecure": true}
+
+},
+
+    {
+  "type": "http",
+  "tag": "3",
+  "server": "185.242.246.198",
+  "server_port": 8000,
+  "username": "rdZTLc",
+  "password": "cSgL9e",
+  "path": "",
+  "headers": {},
+  "tls": {  "enabled": true,
+  "disable_sni": false,
+  "server_name": "telewebion.com",
+  "insecure": true}
+
+},
+        {
+          "type": "http",
+          "tag": "4",
+          "server": "103.229.28.132",
+          "server_port": 8000,
+          "username": "JuYHwf",
+          "password": "2P7MuX",
+          "path": "",
+          "headers": {},
+          "tls": {  "enabled": true,
+          "disable_sni": false,
+          "server_name": "telewebion.com",
+          "insecure": true}
+
+        },
+
+            {
+          "type": "http",
+          "tag": "5",
+          "server": "45.142.30.14",
+          "server_port": 8000,
+          "username": "7aBP2b",
+          "password": "uCq8hW",
+          "path": "",
+          "headers": {},
+          "tls": {  "enabled": true,
+          "disable_sni": false,
+          "server_name": "telewebion.com",
+          "insecure": true}
+
+        },
+
+            {
+          "type": "http",
+          "tag": "6",
+          "server": "103.229.28.11",
+          "server_port": 8000,
+          "username": "1BgdLE",
+          "password": "KoXPtc",
+          "path": "",
+          "headers": {},
+          "tls": {  "enabled": true,
+          "disable_sni": false,
+          "server_name": "telewebion.com",
+          "insecure": true}
+
+        },
+
+            {
+          "type": "http",
+          "tag": "7",
+          "server": "103.229.28.56",
+          "server_port": 8000,
+          "username": "mfaGKE",
+          "password": "VZC1ty",
+          "path": "",
+          "headers": {},
+          "tls": {  "enabled": true,
+          "disable_sni": false,
+          "server_name": "telewebion.com",
+          "insecure": true}
+
+        },
+
+            {
+          "type": "http",
+          "tag": "8",
+          "server": "103.229.28.68",
+          "server_port": 8000,
+          "username": "wJvd4H",
+          "password": "8uWmwk",
+          "path": "",
+          "headers": {},
+          "tls": {  "enabled": true,
+          "disable_sni": false,
+          "server_name": "telewebion.com",
+          "insecure": true}
+
+        },
+
+            {
+          "type": "http",
+          "tag": "9",
+          "server": "45.85.163.59",
+          "server_port": 8000,
+          "username": "4BNvpC",
+          "password": "oJMZrT",
+          "path": "",
+          "headers": {},
+          "tls": {  "enabled": true,
+          "disable_sni": false,
+          "server_name": "telewebion.com",
+          "insecure": true}
+
+        },
+
+            {
+          "type": "http",
+          "tag": "10",
+          "server": "45.94.39.203",
+          "server_port": 8000,
+          "username": "cArUrU",
+          "password": "Kq0eGn",
+          "path": "",
+          "headers": {},
+          "tls": {  "enabled": true,
+          "disable_sni": false,
+          "server_name": "telewebion.com",
+          "insecure": true}
+
+        },
+
+            {
+          "type": "http",
+          "tag": "11",
+          "server": "45.133.222.224",
+          "server_port": 8000,
+          "username": "0efVNH",
+          "password": "bsrGCW",
+          "path": "",
+          "headers": {},
+          "tls": {  "enabled": true,
+          "disable_sni": false,
+          "server_name": "telewebion.com",
+          "insecure": true}
+
+        },
+
+            {
+          "type": "http",
+          "tag": "12",
+          "server": "147.45.85.207",
+          "server_port": 8000,
+          "username": "CUhZcy",
+          "password": "8PK2TA",
+          "path": "",
+          "headers": {},
+          "tls": {  "enabled": true,
+          "disable_sni": false,
+          "server_name": "telewebion.com",
+          "insecure": true}
+
+        },
+
+            {
+          "type": "http",
+          "tag": "13",
+          "server": "45.93.213.249",
+          "server_port": 8000,
+          "username": "edBEDG",
+          "password": "6wyruh",
+          "path": "",
+          "headers": {},
+          "tls": {  "enabled": true,
+          "disable_sni": false,
+          "server_name": "telewebion.com",
+          "insecure": true}
+
+        },
+
+            {
+          "type": "http",
+          "tag": "14",
+          "server": "196.18.1.92",
+          "server_port": 8000,
+          "username": "8Wymdy",
+          "password": "kFSMwQ",
+          "path": "",
+          "headers": {},
+          "tls": {  "enabled": true,
+          "disable_sni": false,
+          "server_name": "telewebion.com",
+          "insecure": true}
+
+        },
+
+        {
+          "type": "http",
+          "tag": "15",
+          "server": "38.154.88.44",
+          "server_port": 8000,
+          "username": "UMbS8u",
+          "password": "7XjKUz",
+          "path": "",
+          "headers": {},
+          "tls": {  "enabled": true,
+          "disable_sni": false,
+          "server_name": "telewebion.com",
+          "insecure": true}
+
+        },
+        {
+                    "tag": "direct",
+                    "type": "direct"
+                },
+                {
+                    "tag": "block",
+                    "type": "block"
+                },
+                {
+                    "tag": "dns-out",
+                    "type": "dns"
+                },
+                {
+                    "tag": "urltest",
+                    "type": "urltest",
+                    "outbounds": [
+
+                        "1",
+                        "2",
+                        "3",
+                        "4",
+                        "5",
+                        "6",
+                        "7",
+                        "8",
+                        "9",
+                        "10",
+                        "11",
+                        "12",
+                        "13",
+                        "14",
+                        "15"
+
+                    ]
+                }
             ],
-            "tag": "Select Manually",
-            "type": "selector"
-        },
-        {
-            "interval": "1m0s",
-            "outbounds": [
-                "SSH1",
-                "SSH2",
-                "SSH3",
-                "SSH4",
-                "SSH5",
-                "SSH6",
-                "SSH7",
-                "SSH8",
-                "SSH9",
-                "SSH10"
-            ],
-            "tag": "Best Latency",
-            "type": "urltest",
-            "url": "https://detectportal.firefox.com/success.txt"
-        },
-        {
-            "domain_strategy": "",
-            "password": "xLo3xj",
-            "server": "103.229.28.29",
-            "server_port": 8000,
-            "tag": "SSH1",
-            "type": "nl1",
-            "user": "n4W3SX"
-        },
-        {
-            "domain_strategy": "",
-            "password": "CHoNSJ",
-            "server": "45.147.31.173",
-            "server_port": 8000,
-            "tag": "SSH2",
-            "type": "sshnl2",
-            "user": "beHWTa"
-        },
-        {
-            "domain_strategy": "",
-            "password": "2P7MuX",
-            "server": "103.229.28.132",
-            "server_port": 8000,
-            "tag": "SSH3",
-            "type": "sshnl3",
-            "user": "JuYHwf"
-        },
-        {
-            "domain_strategy": "",
-            "password": "uCq8hW",
-            "server": "45.142.30.14",
-            "server_port": 8000,
-            "tag": "SSH4",
-            "type": "sshnl4",
-            "user": "7aBP2b"
-        },
-        {
-            "domain_strategy": "",
-            "password": "KoXPtc",
-            "server": "103.229.28.11",
-            "server_port": 8000,
-            "tag": "SSH5",
-            "type": "sshnl5",
-            "user": "1BgdLE"
-        },
-        {
-            "domain_strategy": "",
-            "password": "VZC1ty",
-            "server": "103.229.28.56",
-            "server_port": 8000,
-            "tag": "SSH6",
-            "type": "sshnl6",
-            "user": "mfaGKE"
-        },
-        {
-            "domain_strategy": "",
-            "password": "8uWmwk",
-            "server": "103.229.28.68",
-            "server_port": 8000,
-            "tag": "SSH7",
-            "type": "sshnl7",
-            "user": "wJvd4H"
-        },
-        {
-            "domain_strategy": "",
-            "password": "oJMZrT",
-            "server": "45.85.163.59",
-            "server_port": 8000,
-            "tag": "SSH8",
-            "type": "sshnl8",
-            "user": "4BNvpC"
-        },
-        {
-            "domain_strategy": "",
-            "password": "Kq0eGn",
-            "server": "45.94.39.203",
-            "server_port": 8000,
-            "tag": "SSH9",
-            "type": "sshnl9",
-            "user": "cArUrU"
-        },
-        {
-            "domain_strategy": "",
-            "password": "Nt8v9L",
-            "server": "185.202.0.69",
-            "server_port": 8000,
-            "tag": "SSH10",
-            "type": "sshrussia",
-            "user": "UmumW3"
-        },
-        {
-            "tag": "Direct",
-            "type": "direct"
-        },
-        {
-            "tag": "Bypass",
-            "type": "direct"
-        },
-        {
-            "tag": "Block",
-            "type": "block"
-        },
-        {
-            "tag": "DNS-Out",
-            "type": "dns"
-        }
-    ],
-    "route": {
-        "auto_detect_interface": true,
-        "final": "Select Manually",
-        "geoip": {
-            "download_detour": "Direct",
-            "path": "geoip.db"
-        },
-        "geosite": {
-            "download_detour": "Direct",
-            "path": "geosite.db"
-        },
-        "rules": [
-            {
-                "outbound": "DNS-Out",
-                "port": 53
-            },
-            {
-                "inbound": "dns-in",
-                "outbound": "DNS-Out"
-            },
-            {
-                "geoip": "private",
-                "outbound": "Bypass"
-            },
-            {
-                "geosite": "category-ads-all",
-                "outbound": "Block"
-            },
-            {
-                "domain_suffix": [
-                    "appcenter.ms",
-                    "app-measurement.com",
-                    "firebase.io",
-                    "crashlytics.com",
-                    "google-analytics.com"
-                ],
-                "outbound": "Block"
-            },
-            {
-                "geoip": "ir",
-                "outbound": "Bypass"
-            },
-            {
-                "domain_suffix": "ir",
-                "outbound": "Bypass"
-            },
-            {
-                "ip_cidr": [
-                    "224.0.0.0/3",
-                    "ff00::/8"
-                ],
-                "outbound": "Block",
-                "source_ip_cidr": [
-                    "224.0.0.0/3",
-                    "ff00::/8"
+            "route": {
+                "auto_detect_interface": true,
+                "rules": [
+                    {
+                        "geosite": "category-ads-all",
+                        "outbound": "block"
+                    },
+                    {
+                        "outbound": "dns-out",
+                        "protocol": "dns"
+                    },
+                    {
+                        "clash_mode": "direct",
+                        "outbound": "direct"
+                    },
+                    {
+                        "clash_mode": "global",
+                        "outbound": "hello"
+                    },
+                    {
+                        "geoip": [
+                            "cn",
+                            "private"
+                        ],
+                        "outbound": "direct"
+                    },
+                    {
+                        "geosite": "geolocation-!cn",
+                        "outbound": "hello1"
+                    },
+                    {
+                        "geosite": "cn",
+                        "outbound": "direct"
+                    }
                 ]
             }
-        ]
-    }
-}
+        }
