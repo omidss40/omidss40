@@ -4,13 +4,13 @@
         "disable_expire": false,
         "final": "dns-remote",
         "rules": [
-            {1
+            
                 "domain_suffix": [
                     "ir",
                     "firefox.com"
                 ],
                 "server": "dns-direct"
-            },
+            
             {
                 "disable_cache": true,
                 "domain_suffix": [
