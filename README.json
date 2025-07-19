@@ -1,5 +1,3 @@
-//@onlysockshttp
-
 {
   "dns": {
     "final": "local-dns",
